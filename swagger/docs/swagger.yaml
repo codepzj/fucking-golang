@@ -1,0 +1,36 @@
+definitions:
+  main.Post:
+    properties:
+      content:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /post/{id}:
+    get:
+      parameters:
+      - description: 文章ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功返回文章信息
+          schema:
+            $ref: '#/definitions/main.Post'
+        "400":
+          description: 请求参数错误
+          schema:
+            type: string
+      summary: 获取文章信息
+swagger: "2.0"
