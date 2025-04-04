@@ -1,0 +1,22 @@
+package dao
+
+import (
+	"go.mongodb.org/mongo-driver/v2/mongo"
+)
+
+type I{{.DomainName}}Dao interface {
+}
+
+var _ I{{.DomainName}}Dao = (*{{.DomainName}}Dao)(nil)
+
+func New{{.DomainName}}Dao(db *mongo.Database) *{{.DomainName}}Dao {
+	return &{{.DomainName}}Dao{
+		coll db.Collection({{.TableName}})
+    }
+}
+
+type {{.DomainName}}Dao struct {
+	coll *mongo.Collection
+}
+
+
