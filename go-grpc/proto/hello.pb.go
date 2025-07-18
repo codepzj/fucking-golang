@@ -4,7 +4,7 @@
 // 	protoc        v6.31.1
 // source: hello.proto
 
-package service
+package proto
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -23,9 +23,7 @@ const (
 
 type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RequestMsg    string                 `protobuf:"bytes,1,opt,name=RequestMsg,proto3" json:"RequestMsg,omitempty"`
-	Age           int64                  `protobuf:"varint,2,opt,name=age,proto3" json:"age,omitempty"`
-	Weight        []int64                `protobuf:"varint,3,rep,packed,name=weight,proto3" json:"weight,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -60,48 +58,34 @@ func (*HelloRequest) Descriptor() ([]byte, []int) {
 	return file_hello_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *HelloRequest) GetRequestMsg() string {
+func (x *HelloRequest) GetName() string {
 	if x != nil {
-		return x.RequestMsg
+		return x.Name
 	}
 	return ""
 }
 
-func (x *HelloRequest) GetAge() int64 {
-	if x != nil {
-		return x.Age
-	}
-	return 0
-}
-
-func (x *HelloRequest) GetWeight() []int64 {
-	if x != nil {
-		return x.Weight
-	}
-	return nil
-}
-
-type HelloResponse struct {
+type HelloReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResponseMsg   string                 `protobuf:"bytes,1,opt,name=ResponseMsg,proto3" json:"ResponseMsg,omitempty"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HelloResponse) Reset() {
-	*x = HelloResponse{}
+func (x *HelloReply) Reset() {
+	*x = HelloReply{}
 	mi := &file_hello_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HelloResponse) String() string {
+func (x *HelloReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HelloResponse) ProtoMessage() {}
+func (*HelloReply) ProtoMessage() {}
 
-func (x *HelloResponse) ProtoReflect() protoreflect.Message {
+func (x *HelloReply) ProtoReflect() protoreflect.Message {
 	mi := &file_hello_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -113,14 +97,14 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
-func (*HelloResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use HelloReply.ProtoReflect.Descriptor instead.
+func (*HelloReply) Descriptor() ([]byte, []int) {
 	return file_hello_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *HelloResponse) GetResponseMsg() string {
+func (x *HelloReply) GetMessage() string {
 	if x != nil {
-		return x.ResponseMsg
+		return x.Message
 	}
 	return ""
 }
@@ -129,17 +113,14 @@ var File_hello_proto protoreflect.FileDescriptor
 
 const file_hello_proto_rawDesc = "" +
 	"\n" +
-	"\vhello.proto\"X\n" +
-	"\fHelloRequest\x12\x1e\n" +
+	"\vhello.proto\x12\x05hello\"\"\n" +
+	"\fHelloRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"&\n" +
 	"\n" +
-	"RequestMsg\x18\x01 \x01(\tR\n" +
-	"RequestMsg\x12\x10\n" +
-	"\x03age\x18\x02 \x01(\x03R\x03age\x12\x16\n" +
-	"\x06weight\x18\x03 \x03(\x03R\x06weight\"1\n" +
-	"\rHelloResponse\x12 \n" +
-	"\vResponseMsg\x18\x01 \x01(\tR\vResponseMsg24\n" +
-	"\bSayHello\x12(\n" +
-	"\x05SayHi\x12\r.HelloRequest\x1a\x0e.HelloResponse\"\x00B\vZ\t.;serviceb\x06proto3"
+	"HelloReply\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2=\n" +
+	"\aGreeter\x122\n" +
+	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x11.hello.HelloReplyB\x0fZ\r./proto;protob\x06proto3"
 
 var (
 	file_hello_proto_rawDescOnce sync.Once
@@ -155,12 +136,12 @@ func file_hello_proto_rawDescGZIP() []byte {
 
 var file_hello_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_hello_proto_goTypes = []any{
-	(*HelloRequest)(nil),  // 0: HelloRequest
-	(*HelloResponse)(nil), // 1: HelloResponse
+	(*HelloRequest)(nil), // 0: hello.HelloRequest
+	(*HelloReply)(nil),   // 1: hello.HelloReply
 }
 var file_hello_proto_depIdxs = []int32{
-	0, // 0: SayHello.SayHi:input_type -> HelloRequest
-	1, // 1: SayHello.SayHi:output_type -> HelloResponse
+	0, // 0: hello.Greeter.SayHello:input_type -> hello.HelloRequest
+	1, // 1: hello.Greeter.SayHello:output_type -> hello.HelloReply
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
